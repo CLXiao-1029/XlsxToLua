@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="XlsxToLua-win-arm64" type="DotNetFolderPublish" factoryName="Publish to folder">
+    <riderPublish configuration="Release" delete_existing_files="true" platform="Any CPU" produce_single_file="true" runtime="win-arm64" target_folder="$PROJECT_DIR$/bin/Release/net7.0/win-arm64/publish" target_framework="net7.0" uuid_high="-3762995825671257377" uuid_low="-4942046159791747239" />
+    <method v="2" />
+  </configuration>
+</component>
