@@ -160,6 +160,19 @@ internal static class MultiLanguageHelper
         }
     }
 
+    internal static StringBuilder LoadComment()
+    {
+        // 写出i18n
+        var i18NComment = new StringBuilder();
+        i18NComment.AppendLine("---@class Cfg_i18n");
+        i18NComment.AppendLine($"---@field language string");
+        foreach (var (key, _) in MultilingualList)
+        {
+            i18NComment.AppendLine($"---@field {key} string");
+        }
+        return i18NComment;
+    }
+
     internal static void Save()
     {
         var fileInfo = new FileInfo(FilePath);
@@ -225,13 +238,6 @@ internal static class MultiLanguageHelper
         
         // 写出i18n
         var i18N = new StringBuilder();
-        i18N.AppendLine("---@class Cfg_i18n");
-        i18N.AppendLine($"---@field language string");
-        foreach (var (key, _) in MultilingualList)
-        {
-            i18N.AppendLine($"---@field {key} string");
-        }
-        i18N.AppendLine();
         i18N.AppendLine("---@type Cfg_i18n");
         i18N.AppendLine("local cfg_i18n = {");
         i18N.AppendLineIndent("language = \"en\"");

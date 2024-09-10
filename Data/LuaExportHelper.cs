@@ -169,6 +169,7 @@ public class LuaExportHelper
 
         if (!MainArgs.SplitComment) return;
         Logger.Info("生成lua注释 . . .");
+        AddComment("Cfg_i18n", MultiLanguageHelper.LoadComment());
         FileUtils.SafeSave(MainArgs.LuaFileName("ConfigComment"), CommentToString());
     }
     
@@ -256,6 +257,11 @@ public class LuaExportHelper
     private static bool AddComment(string name, string content)
     {
         return Comment.TryAdd(name, content);
+    }
+    
+    public static bool AddComment(string name, StringBuilder content)
+    {
+        return Comment.TryAdd(name, content.ToString());
     }
     
     /// <summary>
