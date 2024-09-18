@@ -625,6 +625,10 @@ internal static class Values
             if (!isNull)
                 content.AppendLineIndent($"{key} = {data},");
         }
+        else
+        {
+            Logger.Error($"表名：{name} ,第{row}行{column}列数据类型[{type}]错误，key = {key}");
+        }
 
         --IndentLevel;
     }
