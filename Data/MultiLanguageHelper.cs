@@ -251,7 +251,7 @@ internal static class MultiLanguageHelper
         i18N.AppendLineIndent("local languages = require (\"Data.\" .. t.language)");
         i18N.AppendLineIndent("if languages[key] == nil then");
         ++Values.IndentLevel;
-        i18N.AppendLineIndent("CS.UnityEngine.Debug.LogError(languages[key],(\"多语言表的[%s]语种中不存在key[%s]\\n%s\"):format(tostring(t.language),tostring(key), debug.traceback()))");
+        i18N.AppendLineIndent("CS.UnityEngine.Debug.LogError((\"多语言表的[%s]语种中不存在key[%s] languages[key] == nil\\n%s\"):format(tostring(t.language),tostring(key), debug.traceback()))");
         --Values.IndentLevel;
         i18N.AppendLineIndent("end");
         i18N.AppendLineIndent("return languages[key]");
