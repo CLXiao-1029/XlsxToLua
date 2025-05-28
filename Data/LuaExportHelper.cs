@@ -258,8 +258,8 @@ public class LuaExportHelper
     {
         return Comment.TryAdd(name, content);
     }
-    
-    public static bool AddComment(string name, StringBuilder content)
+
+    private static bool AddComment(string name, StringBuilder content)
     {
         return Comment.TryAdd(name, content.ToString());
     }
@@ -271,14 +271,12 @@ public class LuaExportHelper
     private static string CommentToString()
     {
         var comment = new StringBuilder();
+        if (MainArgs.Tortoise != TortoiseType.None)
+            comment.AppendLine($"--ConfigLatestCommit:{TortoiseHelper.CommitLog}");
         foreach (var (key, value) in Comment)
         {
             comment.Append(value);
         }
-
-        comment.Append('\n');
-        if (MainArgs.Tortoise != TortoiseType.None)
-            comment.AppendLine($"--ConfigLatestCommit:{TortoiseHelper.CommitLog}");
 
         return comment.ToString();
     }
@@ -334,6 +332,8 @@ public class LuaExportHelper
                 GenAnnotation(tableName, content);
 
             content.AppendLine($"local {tableName} = {{");
+            
+            AddCommitId(content);
             --Values.IndentLevel;
         }
         
@@ -484,7 +484,9 @@ public class LuaExportHelper
             merge.AppendLine($"---@type Cfg_{name}");
 
             merge.AppendLine($"local cfg_{name} = {{");
-
+            
+            AddCommitId(merge);
+            
             var content = Content[name];
             merge.Append($"{content}");
             merge.AppendLine("}");
@@ -495,5 +497,23 @@ public class LuaExportHelper
         }
 
         return builders;
+    }
+
+    private static void AddCommitId(StringBuilder content)
+    {
+        if (MainArgs.Tortoise == TortoiseType.None) return;
+        var commitId = $"__CommitId = \"{TortoiseHelper.CommitLog?.Trim()}\",";
+        if (MainArgs.Order)
+        {
+            content.AppendLineIndent("{");
+            ++Values.IndentLevel;
+            content.AppendLineIndent(commitId);
+            --Values.IndentLevel;
+            content.AppendLineIndent("}");
+        }
+        else
+        {
+            content.AppendLineIndent(commitId);
+        }
     }
 }

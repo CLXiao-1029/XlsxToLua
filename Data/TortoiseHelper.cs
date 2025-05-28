@@ -11,7 +11,6 @@ internal static class TortoiseHelper
     public static string? CommitLog; 
     internal static void LatestCommitRecord(string workPath)
     {
-        CommitLog = "";
         switch (MainArgs.Tortoise)
         {
             case TortoiseType.Git:
@@ -27,6 +26,9 @@ internal static class TortoiseHelper
 
                 break;
             }
+            default:
+                CommitLog = null;
+                break;
         }
         
         Logger.Warning($"最新提交记录: {CommitLog}");
