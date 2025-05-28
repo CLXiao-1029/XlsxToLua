@@ -389,6 +389,18 @@ public class LuaExportHelper
                         Logger.Error($"表名：{tableName} ,第{row}行{column}列，key = {varKey}，单元格值错误：{rowData}");
                         isNull = true;
                     }
+                    else
+                    {
+
+                        var stringIsNull = string.IsNullOrEmpty(rowData.ToString());
+                        var varTypeContains = varType.Contains("array", StringComparison.InvariantCultureIgnoreCase)
+                                              || varType.Contains('[', StringComparison.InvariantCultureIgnoreCase);
+                        if (varTypeContains && stringIsNull)
+                        {
+                            Logger.Warning($"表名：{tableName} ,第{row}行{column}列，key = {varKey}，单元格值错误：{rowData}");
+                            isNull = true;
+                        }
+                    }
                 }
 
                 var isTranslationVal = false;

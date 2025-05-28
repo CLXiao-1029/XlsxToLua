@@ -63,13 +63,13 @@ internal static class MainArgs
         
         ConfigPath = args[0];
         ExportPath = args[1];
-        if (args.Length >= 2) if (!bool.TryParse(args[2], out Order)) Order = false;
-        if (args.Length >= 3) if (!bool.TryParse(args[3], out Summary)) Summary = false;
-        if (args.Length >= 4) if (!bool.TryParse(args[4], out SplitComment)) SplitComment = true;
-        if (args.Length >= 5) if (!bool.TryParse(args[5], out ExtractText)) ExtractText = true;
-        if (args.Length >= 6) if (!bool.TryParse(args[6], out ShowTime)) ShowTime = false;
-        if (args.Length >= 7) if (!Enum.TryParse(args[7],true, out Tortoise)) Tortoise = TortoiseType.None;
-        if (args.Length >= 8) if (!Enum.TryParse(args[8],true, out NamingRule)) NamingRule = NameRule.None;
+        if (args.Length > 2) if (!bool.TryParse(args[2], out Order)) Order = false;
+        if (args.Length > 3) if (!bool.TryParse(args[3], out Summary)) Summary = false;
+        if (args.Length > 4) if (!bool.TryParse(args[4], out SplitComment)) SplitComment = true;
+        if (args.Length > 5) if (!bool.TryParse(args[5], out ExtractText)) ExtractText = true;
+        if (args.Length > 6) if (!bool.TryParse(args[6], out ShowTime)) ShowTime = false;
+        if (args.Length > 7) if (!Enum.TryParse(args[7],true, out Tortoise)) Tortoise = TortoiseType.None;
+        if (args.Length > 8) if (!Enum.TryParse(args[8],true, out NamingRule)) NamingRule = NameRule.None;
     }
     
     internal static void PrintArgs()
